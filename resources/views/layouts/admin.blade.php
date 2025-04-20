@@ -55,12 +55,6 @@
               Articles
             </a>
           </li>
-          <li class="{{$url=='destinations'?'active':''}}">
-            <a href="{{url('admin/destinations')}}">
-              <i class="menu-icon fa fa-paper-plane-o"></i>
-              Destinations
-            </a>
-          </li>
           <li class="{{$url=='catalogs'?'active':''}}">
               <a href="{{url('admin/catalogs')}}">
                 <i class="menu-icon fa fa-book"></i>
