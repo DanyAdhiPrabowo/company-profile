@@ -49,7 +49,7 @@
                     @foreach($catalogs as $item)
                     <div class="col-lg-4 col-md-6">
                         <div class="card my-3">
-                          <img class="card-img-top" src="{{asset('catalog_image/app-1.jpg')}}" alt="Card image cap">
+                          <img class="card-img-top" src="{{asset('catalog_image/'.$item->image)}}" alt="Card image cap" style="height: 200px; object-fit: cover;">
                           <div class="card-body">
                             <h5 class="card-title font-weight-bold">{{$item->name}}</h5>
                             <p class="card-text">{{$item->description}}</p>
