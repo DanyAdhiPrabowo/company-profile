@@ -25,8 +25,8 @@
 @endsection
 
 @section('hero')
-    <h1>Blog Jogja-Travel</h1>
-    <h2>Kumpulan artikel-artikel wisata Jogja, Tips travelling, dan kesehatan</h2>
+    <h1>Catalog Fourjoo</h1>
+    <h2>Cek semua katalog yang anda inginkan</h2>
 @endsection
 
 
