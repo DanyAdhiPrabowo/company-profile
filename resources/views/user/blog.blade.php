@@ -20,24 +20,24 @@
         .article{
           line-height: 1.6;
           font-size: 15px;
-        } 
-    </style>    
+        }
+    </style>
 @endsection
 
 @section('hero')
-    <h1>Blog Jogja-Travel</h1>
-    <h2>Kumpulan artikel-artikel wisata Jogja, Tips travelling, dan kesehatan</h2>
+    <h1>Blog Mengenai Coffe Shop</h1>
+    <h2>Kumpulan artikel-artikel mengenai perkembangan kopi</h2>
 @endsection
 
 
-@section('content')  
+@section('content')
       <!--========================== Article Section ============================-->
       <section id="about">
         <div class="container wow fadeIn">
 
           <div class="row">
             <div class="col-9">
-              
+
               @if (empty(request()->segment(2)) )
                 @component('user.component.all_blog', ['articles'=> $articles])
                 @endcomponent
@@ -60,7 +60,7 @@
                 <div class="mb-3 font-weight-bold">Recent Posts</div>
                 @foreach ($recents as $recent)
                   <div>
-                      <a href="{{route('blog.show', [$recent->slug])}}"> <i class="fa fa-dot-circle-o" aria-hidden="true"></i> 
+                      <a href="{{route('blog.show', [$recent->slug])}}"> <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
                         {{$recent->title}}
                       </a>
                       <hr >
@@ -71,6 +71,6 @@
 
         </div>
       </section><!-- #services -->
-  
-     
+
+
 @endsection
