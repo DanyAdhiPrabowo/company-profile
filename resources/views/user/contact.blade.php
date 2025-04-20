@@ -8,11 +8,11 @@
             width:100%;
             background-size:cover;
         }
-    </style>    
+    </style>
 @endsection
 
 @section('hero')
-    <h1>Contact Jogja-Travel</h1>
+    <h1>Fourjoo</h1>
     <h2>Bergabung dan liburan bersama Kami</h2>
 @endsection
 
