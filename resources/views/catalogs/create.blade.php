@@ -45,8 +45,8 @@
                             </label>
                           </div>
                           <div class="radio">
-                            <label for="coffe" class="form-check-label ">
-                              <input type="radio" name="category" value="coffe" class="form-check-input">Coffe
+                            <label for="coffee" class="form-check-label ">
+                              <input type="radio" name="category" value="coffee" class="form-check-input">Coffee
                             </label>
                           </div>
                         </div>
