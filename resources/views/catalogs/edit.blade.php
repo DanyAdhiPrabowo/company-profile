@@ -65,7 +65,7 @@
                       <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar.</small>
                     </div>
                     <div class="mb-3 mt-4">
-                      <a href="{{route('categories.index')}}" class="btn btn-md btn-secondary">Back</a>
+                      <a href="{{route('catalogs.index')}}" class="btn btn-md btn-secondary">Back</a>
                       <button type="submit" class="btn btn-md btn-success">Update</button>
                     </div>
                 </div>

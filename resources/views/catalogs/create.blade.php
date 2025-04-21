@@ -59,7 +59,7 @@
                     <div class="invalid-feedback"> {{$errors->first('image')}}</div>
                   </div>
                   <div class="mb-3 mt-4">
-                    <a href="{{route('categories.index')}}" class="btn btn-md btn-secondary">Back</a>
+                    <a href="{{route('catalogs.index')}}" class="btn btn-md btn-secondary">Back</a>
                     <button type="submit" class="btn btn-md btn-success">Save</button>
                   </div>
               </div>
