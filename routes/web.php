@@ -7,7 +7,6 @@ Route::get('/blog/{slug}', 'UserController@show_article')->name('blog.show');
 Route::get('/destination', 'UserController@destination')->name('destination');
 Route::get('/destination/{slug}', 'UserController@show_destination')->name('destination.show');
 Route::get('/catalog', 'UserController@catalog')->name('catalog');
-Route::get('/catalog-cofee', 'UserController@catalogCofee')->name('catalog.cofee');
 Route::get('/contact', 'UserController@contact')->name('contact');
 
 Route::prefix('admin')->group(function(){
