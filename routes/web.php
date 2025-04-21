@@ -4,8 +4,6 @@ Route::get('/', function(){return redirect('/home');});
 Route::get('/home', 'UserController@home')->name('home');
 Route::get('/blog', 'UserController@blog')->name('blog');
 Route::get('/blog/{slug}', 'UserController@show_article')->name('blog.show');
-Route::get('/destination', 'UserController@destination')->name('destination');
-Route::get('/destination/{slug}', 'UserController@show_destination')->name('destination.show');
 Route::get('/catalog', 'UserController@catalog')->name('catalog');
 Route::get('/contact', 'UserController@contact')->name('contact');
 
@@ -44,8 +42,8 @@ Route::prefix('admin')->group(function(){
   Route::post('/articles/upload', 'ArticleController@upload')->name('articles.upload')->middleware('auth');
   Route::resource('/articles', 'ArticleController')->middleware('auth');
 
-  // route destination
-  Route::resource('/destinations', 'DestinationController')->middleware('auth');
+  // route employee
+  Route::resource('/employees', 'EmployeeController')->middleware('auth');
 
   // Route about
   Route::get('/abouts', 'AboutController@index')->name('abouts.index')->middleware('auth');

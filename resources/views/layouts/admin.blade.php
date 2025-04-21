@@ -61,9 +61,15 @@
                 Catalogs
               </a>
           </li>
+          <li class="{{$url=='employees'?'active':''}}">
+              <a href="{{url('admin/employees')}}">
+                <i class="menu-icon fa fa-users"></i>
+                Employees
+              </a>
+          </li>
           <li class="{{$url=='abouts'?'active':''}}">
               <a href="{{url('admin/abouts')}}">
-                <i class="menu-icon fa fa-user"></i>
+                <i class="menu-icon fa fa-info-circle"></i>
                 About
               </a>
           </li>
