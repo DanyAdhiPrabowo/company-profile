@@ -90,24 +90,17 @@ class UserController extends Controller
   }
 
   public function catalog(Request $request){
-    $keyword    = $request->get('s') ? $request->get('s') : '';
+    $keyword    = $request->get('c') ? $request->get('c') : '';
 
     $category = 'vape';
-    if($keyword == 'cofee'){
-      $category = 'cofee';
+    if($keyword == 'coffee'){
+      $category = 'coffee';
     }
 
     $data = [
       'catalogs'    => Catalog::where('category', $category)->orderBy('id', 'desc')->get(),
     ];
 
-    return view('user/catalog', $data);
-  }
-
-  public function catalogCofee(){
-    $data = [
-      'catalog'    => Catalog::where('category', 'cofee')->orderBy('id', 'desc')
-    ];
     return view('user/catalog', $data);
   }
 
