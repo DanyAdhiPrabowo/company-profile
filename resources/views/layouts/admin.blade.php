@@ -29,7 +29,9 @@
 <body>
 
   @php
-      $url = request()->segment(2);
+    $url = request()->segment(2);
+    $role = Auth::user()->role;
+    $isAdmin = $role == 'admin' ? true : false;
   @endphp
 
   <!-- Left Panel -->
@@ -61,6 +63,7 @@
                 Catalogs
               </a>
           </li>
+          @if($isAdmin)
           <li class="{{$url=='employees'?'active':''}}">
               <a href="{{url('admin/employees')}}">
                 <i class="menu-icon fa fa-users"></i>
@@ -73,6 +76,7 @@
                 About
               </a>
           </li>
+          @endif
         </ul>
       </div><!-- /.navbar-collapse -->
     </nav>

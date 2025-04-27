@@ -10,45 +10,50 @@ Route::get('/contact', 'UserController@contact')->name('contact');
 Route::prefix('admin')->group(function(){
 
   Route::get('/', function(){
-    return view('auth/login');
+    return redirect('/admin/login');
   });
 
-  // handle route register
-  Route::match(["GET", "POST"], "/register", function(){
-    return redirect("/login");
-  })->name("register");
+  Route::get('/register', function () {
+    return redirect('/admin');
+  })->name('admin.register');
 
-  Auth::routes();
+  Auth::routes(['register' => false]);
 
-  // Route Dashboard
-  Route::get('/dashboard', 'DashboardController@index')->middleware('auth');
+  Route::middleware(['auth'])->group(function () {
 
-  // route catalogs
-  Route::get('/catalogs', 'CatalogController@index')->name('catalogs.index');
-  Route::get('/catalogs/create', 'CatalogController@create')->name('catalogs.create');
-  Route::post('/catalogs/store', 'CatalogController@store')->name('catalogs.store');
-  Route::get('/catalogs/{catalog}/edit', 'CatalogController@edit')->name('catalogs.edit');
-  Route::put('/catalogs/{catalog}', 'CatalogController@update')->name('catalogs.update');
-  Route::delete('/catalogs/{catalog}', 'CatalogController@destroy')->name('catalogs.destroy');
-  Route::resource('catalogs', 'CatalogController')->middleware('auth');
+      // Route Dashboard
+      Route::get('/dashboard', 'DashboardController@index');
 
-  // route categories
-  Route::get('/categories/{category}/restore', 'CategoryController@restore')->name('categories.restore');
-  Route::delete('/categories/{category}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
-  Route::get('/ajax/categories/search', 'CategoryController@ajaxSearch');
-  Route::resource('categories', 'CategoryController')->middleware('auth');
+      // route catalogs
+      Route::get('/catalogs', 'CatalogController@index')->name('catalogs.index');
+      Route::get('/catalogs/create', 'CatalogController@create')->name('catalogs.create');
+      Route::post('/catalogs/store', 'CatalogController@store')->name('catalogs.store');
+      Route::get('/catalogs/{catalog}/edit', 'CatalogController@edit')->name('catalogs.edit');
+      Route::put('/catalogs/{catalog}', 'CatalogController@update')->name('catalogs.update');
+      Route::delete('/catalogs/{catalog}', 'CatalogController@destroy')->name('catalogs.destroy');
+      Route::resource('catalogs', 'CatalogController');
 
-  // route article
-  Route::post('/articles/upload', 'ArticleController@upload')->name('articles.upload')->middleware('auth');
-  Route::resource('/articles', 'ArticleController')->middleware('auth');
+      // route categories
+      Route::get('/categories/{category}/restore', 'CategoryController@restore')->name('categories.restore');
+      Route::delete('/categories/{category}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
+      Route::get('/ajax/categories/search', 'CategoryController@ajaxSearch');
+      Route::resource('categories', 'CategoryController');
 
-  // route employee
-  Route::resource('/employees', 'EmployeeController')->middleware('auth');
-
-  // Route about
-  Route::get('/abouts', 'AboutController@index')->name('abouts.index')->middleware('auth');
-  Route::get('/abouts/{about}/edit', 'AboutController@edit')->name('abouts.edit')->middleware('auth');
-  Route::put('/abouts/{about}', 'AboutController@update')->name('abouts.update')->middleware('auth');
+      // route article
+      Route::post('/articles/upload', 'ArticleController@upload')->name('articles.upload');
+      Route::resource('/articles', 'ArticleController');
+    // Route::middleware('role:admin|employee')->group(function () {
+    // });
 
 
+    Route::middleware('role:admin')->group(function () {
+      // route employee
+      Route::resource('/employees', 'EmployeeController');
+
+      // Route about
+      Route::get('/abouts', 'AboutController@index')->name('abouts.index');
+      Route::get('/abouts/{about}/edit', 'AboutController@edit')->name('abouts.edit');
+      Route::put('/abouts/{about}', 'AboutController@update')->name('abouts.update');
+    });
+  });
 });
