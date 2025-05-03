@@ -35,7 +35,7 @@ class ArticleController extends Controller
       // $articles = \App\Article::with('categories')->where('title', 'LIKE', "%$keyword%")->paginate(10);
       $articles = Article::with('categories')
                           ->whereHas('categories', function($q) use($category) {
-                            $q->where('name', 'LIKE', "%$category%"); 
+                            $q->where('name', 'LIKE', "%$category%");
                           })
                           ->where('title', 'LIKE', "%$keyword%")
                           ->orderBy('created_at', 'desc')
@@ -74,23 +74,13 @@ class ArticleController extends Controller
     $new_articles->create_by    = \Auth::user()->id;
     $new_articles->status       = $request->get('save_action');
     $new_articles->save();
-    
+
     // save in table article category
     $new_articles->categories()->attach($request->get('categories'));
 
     return redirect()->route('articles.index')->with('success', 'Article successfully created');
 }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Article  $article
-   * @return \Illuminate\Http\Response
-   */
-  public function show(Article $article)
-  {
-      //
-  }
 
   /**
    * Show the form for editing the specified resource.
@@ -151,12 +141,12 @@ class ArticleController extends Controller
       // $request->file('upload')->move(public_path('images'), $fileName);
 
       // $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-      
-      // $url = asset('images/'.$fileName); 
-      // $msg = 'Image uploaded successfully'; 
+
+      // $url = asset('images/'.$fileName);
+      // $msg = 'Image uploaded successfully';
 
       // $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-      // @header('Content-type: text/html; charset=utf-8'); 
+      // @header('Content-type: text/html; charset=utf-8');
 
       // echo $response;
 

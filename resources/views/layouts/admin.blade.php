@@ -104,24 +104,16 @@
                             </a>
 
                             <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa-cog"></i>Ganti Password</a>
-                                {{-- <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-power-off"></i> Logout
+                                <a class="nav-link" href="{{url('admin/change-password')}}">
+                                  <i class="fa fa-cog"></i>
+                                  Ganti Password
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form> --}}
-
                                 <div class="nav-link" style="cursor:pointer" onclick="logout()" data-target="#modalLogout" data-toggle="modal">
-                                    <i class="fa fa-power-off"></i> Logout
+                                    <i class="fa fa-power-off"></i>
+                                    Logout
                                 </div>
-
-
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </header>
@@ -207,9 +199,6 @@
     <!-- End Modal Logout -->
 
 
-
-
-
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
@@ -234,10 +223,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="{{asset('ElaAdmin/js/main.js')}}"></script>
-
-
-
-
 
 </body>
 </html>

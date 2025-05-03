@@ -49,7 +49,6 @@ class CategoryController extends Controller
         $new_category->slug         = \Str::slug($request->get('name'), '-');
 
         if($request->file('image')){
-            // $image_path = $request->file('image')->store('category_image', 'public');
             $nama_file = time()."_".$request->file('image')->getClientOriginalName();
             $image_path = $request->file('image')->move('category_image', $nama_file);
             $new_category->image = $nama_file;
@@ -61,16 +60,6 @@ class CategoryController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -100,23 +89,16 @@ class CategoryController extends Controller
             'description'   => 'required',
             'slug'          => 'required',
         ])->validate();
-        
+
         $category->name         = $request->get('name');
         $category->description  = $request->get('description');
         $category->slug         = $request->get('slug');
-        
+
 
         if($request->file('image')){
-            // ebook
-            // if($category->image && file_exists(storage_path('app/public/'.$category->image))){
-            //     \Storage::delete('public/'.$category->image);
-            // }
-            // $new_image = $request->file('image')->store('category_image', 'public');
-            
             if($category->image){
                 File::delete('category_image/'.$category->image);
             }
-            // $new_image = $request->file('image')->store('category_image', 'public');
             $nama_file = time()."_".$request->file('image')->getClientOriginalName();
             $new_image = $request->file('image')->move('category_image', $nama_file);
 
@@ -159,9 +141,6 @@ class CategoryController extends Controller
         $category = \App\Category::withTrashed()->findOrFail($id);
         $category->articles()->sync([]);
 
-        // if($category->image && file_exist(storage_path('app/public/'.$category->image))){
-        //     \Storage::delete('public/'.$category->image);
-        // }
         if($category->image){
             File::delete('category_image/'.$category->image);
         }
@@ -169,8 +148,6 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index')->with('success', 'Category successfully deleted.');
     }
-
-
 
     // ajax select2
     public function ajaxSearch(Request $request)

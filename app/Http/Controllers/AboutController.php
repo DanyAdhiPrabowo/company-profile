@@ -16,40 +16,7 @@ class AboutController extends Controller
   public function index()
   {
     $abouts = \App\About::get();
-    // dd($abouts);
     return view('abouts.index', ['abouts' => $abouts ]);
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-      //
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(Request $request)
-  {
-      //
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\About  $about
-   * @return \Illuminate\Http\Response
-   */
-  public function show(About $about)
-  {
-      //
   }
 
   /**
@@ -78,14 +45,10 @@ class AboutController extends Controller
       \Validator::make($request->all(),[
           'caption'     => 'required|min:15',
       ])->validate();
-      
-      $about->caption         = $request->get('caption');        
+
+      $about->caption         = $request->get('caption');
 
       if($request->file('image')){
-          // if($about->image && file_exists(storage_path('app/public/'.$about->image))){
-          //     \Storage::delete('public/'.$about->image);
-          // }
-
           if($about->image){
               File::delete('about_image/'.$about->image);
           }
@@ -99,16 +62,5 @@ class AboutController extends Controller
       $about->save();
 
       return redirect()->route('abouts.index')->with('success', 'Data successfully updated');
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\About  $about
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy(About $about)
-  {
-      //
   }
 }

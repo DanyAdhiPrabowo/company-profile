@@ -17,33 +17,36 @@ Route::prefix('admin')->group(function(){
     return redirect('/admin');
   })->name('admin.register');
 
-  Auth::routes(['register' => false]);
+  Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'Auth\LoginController@login')->name('login.post');
 
   Route::middleware(['auth'])->group(function () {
 
-      // Route Dashboard
-      Route::get('/dashboard', 'DashboardController@index');
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('/change-password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('change-password');
+    Route::put('/change-password', 'Auth\ChangePasswordController@changePassword')->name('change-password.update');
 
-      // route catalogs
-      Route::get('/catalogs', 'CatalogController@index')->name('catalogs.index');
-      Route::get('/catalogs/create', 'CatalogController@create')->name('catalogs.create');
-      Route::post('/catalogs/store', 'CatalogController@store')->name('catalogs.store');
-      Route::get('/catalogs/{catalog}/edit', 'CatalogController@edit')->name('catalogs.edit');
-      Route::put('/catalogs/{catalog}', 'CatalogController@update')->name('catalogs.update');
-      Route::delete('/catalogs/{catalog}', 'CatalogController@destroy')->name('catalogs.destroy');
-      Route::resource('catalogs', 'CatalogController');
+    // Route Dashboard
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-      // route categories
-      Route::get('/categories/{category}/restore', 'CategoryController@restore')->name('categories.restore');
-      Route::delete('/categories/{category}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
-      Route::get('/ajax/categories/search', 'CategoryController@ajaxSearch');
-      Route::resource('categories', 'CategoryController');
+    // route catalogs
+    Route::get('/catalogs', 'CatalogController@index')->name('catalogs.index');
+    Route::get('/catalogs/create', 'CatalogController@create')->name('catalogs.create');
+    Route::post('/catalogs/store', 'CatalogController@store')->name('catalogs.store');
+    Route::get('/catalogs/{catalog}/edit', 'CatalogController@edit')->name('catalogs.edit');
+    Route::put('/catalogs/{catalog}', 'CatalogController@update')->name('catalogs.update');
+    Route::delete('/catalogs/{catalog}', 'CatalogController@destroy')->name('catalogs.destroy');
+    Route::resource('catalogs', 'CatalogController');
 
-      // route article
-      Route::post('/articles/upload', 'ArticleController@upload')->name('articles.upload');
-      Route::resource('/articles', 'ArticleController');
-    // Route::middleware('role:admin|employee')->group(function () {
-    // });
+    // route categories
+    Route::get('/categories/{category}/restore', 'CategoryController@restore')->name('categories.restore');
+    Route::delete('/categories/{category}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
+    Route::get('/ajax/categories/search', 'CategoryController@ajaxSearch');
+    Route::resource('categories', 'CategoryController');
+
+    // route article
+    Route::post('/articles/upload', 'ArticleController@upload')->name('articles.upload');
+    Route::resource('/articles', 'ArticleController');
 
 
     Route::middleware('role:admin')->group(function () {
