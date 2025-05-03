@@ -6,6 +6,7 @@ use App\Category;
 
 use App\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -131,25 +132,17 @@ class ArticleController extends Controller
     return redirect()->route('articles.index')->with('success', 'Article permanenly delete');
   }
 
-  public function upload(Reques $request){
+  public function upload(Request $request){
     if($request->hasFile('upload')) {
-      // $originName = $request->file('upload')->getClientOriginalName();
-      // $fileName   = pathinfo($originName, PATHINFO_FILENAME);
-      // $extension  = $request->file('upload')->getClientOriginalExtension();
-      // $fileName   = $fileName.'_'.time().'.'.$extension;
+        $file = $request->file('upload');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('article_image'), $filename);
 
-      // $request->file('upload')->move(public_path('images'), $fileName);
+        $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+        $url = asset('article_image/' . $filename);
+        $msg = 'Image uploaded successfully';
 
-      // $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-
-      // $url = asset('images/'.$fileName);
-      // $msg = 'Image uploaded successfully';
-
-      // $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-      // @header('Content-type: text/html; charset=utf-8');
-
-      // echo $response;
-
+        return response("<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>");
     }
   }
 

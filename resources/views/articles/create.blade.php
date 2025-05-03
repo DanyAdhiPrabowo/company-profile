@@ -9,7 +9,7 @@
 @endsection
 
 @section('css')
-    <script src="/templateEditor/ckeditor/ckeditor.js"></script> 
+    <script src="/templateEditor/ckeditor/ckeditor.js"></script>
 @endsection
 
 @section('content')
@@ -36,7 +36,6 @@
                                 <label for="content" class="font-weight-bold">Content</label>
                                 <textarea id="content" class="form-control ckeditor" name="content" rows="10" cols="50"></textarea>
                             </div>
-                            
                             <div class="mb-3 mt-4">
                                 <button class="btn btn-secondary" name="save_action" value="DRAFT">Save as draft</button>
                                 <button class="btn btn-success" name="save_action" value="PUBLISH">Publish</button>
@@ -54,7 +53,7 @@
     {{-- ckeditor --}}
     <script>
         CKEDITOR.replace( 'content', {
-            filebrowserUploadUrl    : "{{route('articles.upload', ['_token' => csrf_token()])}}",
+            filebrowserUploadUrl    : "{{ route('articles.upload') }}?_token={{ csrf_token() }}",
             filebrowserUploadMethod : 'form'
         });
     </script>
