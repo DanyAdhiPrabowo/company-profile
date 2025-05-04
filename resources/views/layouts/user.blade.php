@@ -94,16 +94,13 @@
 
   <!-- JavaScript Libraries -->
   <script src="{{asset('user/lib/jquery/jquery.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
   <script src="{{asset('user/lib/easing/easing.min.js')}}"></script>
   <script src="{{asset('user/lib/wow/wow.min.js')}}"></script>
-
   <script src="{{asset('user/lib/superfish/superfish.min.js')}}"></script>
-
-  <!-- Contact Form JavaScript File -->
-  {{-- <script src="{{asset('user/contactform/contactform.js')}}"></script> --}}
 
   <!-- Template Main Javascript File -->
   <script src="{{asset('user/js/main.js')}}"></script>
-
 </body>
 </html>
