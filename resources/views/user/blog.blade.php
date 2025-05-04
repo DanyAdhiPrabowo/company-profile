@@ -33,8 +33,7 @@
 @section('content')
       <!--========================== Article Section ============================-->
       <section id="about">
-        <div class="container wow fadeIn">
-
+        <div class="container wow fadeIn" style="max-width: 1380px">
           <div class="row">
             <div class="col-9">
 
@@ -70,7 +69,7 @@
           </div>
 
         </div>
-      </section><!-- #services -->
+      </section>
 
 
 @endsection
