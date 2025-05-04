@@ -7,6 +7,7 @@ use App\Category;
 use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use File;
 
 class ArticleController extends Controller
 {
@@ -62,10 +63,11 @@ class ArticleController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
-  {
+  public function store(Request $request) {
     \Validator::make($request->all(),[
-      'title'      => 'required|min:2|max:200'
+      'title'      => 'required|min:2|max:200',
+      'categories' => 'required',
+      'content'    => 'required',
     ])->validate();
 
     $new_articles               = new \App\Article;
@@ -74,6 +76,12 @@ class ArticleController extends Controller
     $new_articles->content      = $request->get('content');
     $new_articles->create_by    = \Auth::user()->id;
     $new_articles->status       = $request->get('save_action');
+
+    if($request->file('image')){
+      $nama_file = time()."_".$request->file('image')->getClientOriginalName();
+      $image_path = $request->file('image')->move('article_image', $nama_file);
+      $new_articles->thumbnail = $nama_file;
+    }
     $new_articles->save();
 
     // save in table article category
@@ -89,8 +97,7 @@ class ArticleController extends Controller
    * @param  \App\Article  $article
    * @return \Illuminate\Http\Response
    */
-  public function edit($id)
-  {
+  public function edit($id) {
     $article = \App\Article::findOrFail($id);
     return view('articles.edit', ['article'=>$article]);
   }
@@ -102,8 +109,7 @@ class ArticleController extends Controller
    * @param  \App\Article  $article
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
-  {
+  public function update(Request $request, $id) {
     $article = \App\Article::findOrFail($id);
 
     $article->title        = $request->get('title');
@@ -111,6 +117,16 @@ class ArticleController extends Controller
     $article->content      = $request->get('content');
     $article->status       = $request->get('save_action');
     $article->update_by    = \Auth::user()->id;
+
+    if ($request->file('thumbnail')) {
+      if ($article->thumbnail && file_exists(public_path('article_image/'.$article->thumbnail))) {
+        File::delete('article_image/'.$article->thumbnail);
+      }
+
+      $nama_file = time()."_".$request->file('thumbnail')->getClientOriginalName();
+      $image_path = $request->file('thumbnail')->move('article_image', $nama_file);
+      $article->thumbnail = $nama_file;
+    }
 
     $article->categories()->sync($request->get('categories'));
 
@@ -124,8 +140,7 @@ class ArticleController extends Controller
    * @param  \App\Article  $article
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
-  {
+  public function destroy($id) {
     $article = \App\Article::findOrFail($id);
     $article->forceDelete();
 
